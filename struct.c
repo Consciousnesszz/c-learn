@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Books {
+  char name[50];
+  char author[50];
+  char subject[100];
+  int book_id;
+};
+
+typedef struct {
+  unsigned char a; // 1 + 3空闲
+  unsigned int b; // 4
+  unsigned char c; // 1 + 3空闲
+} size1_t;
+
+typedef struct {
+  unsigned char a; // 1
+  unsigned char b; // 1 + 2空闲
+  unsigned int c; // 4
+} size2_t;
+
+// 位域， 占 1 个字节 8 比特，如一个字节所剩空间不够存放另一位域时，应从下一单元起存放该位域。也可以有意使某位域从下一单元开始。
+struct bs {
+  int a: 1;
+  int b: 1;
+  int  : 2; // 该两位不能用
+  int c: 4;
+};
+
+void printBook(struct Books *book) {
+  // 使用 -> 运算符，通过 指针方式 访问 struct（结构）成员
+  printf("Book name : %s\n", book->name);
+  printf("Book author : %s\n", book->author);
+  printf("Book subject : %s\n", book->subject);
+  printf("Book book_id : %d\n", book->book_id);
+}
+
+int main() {
+  struct Books tribody;
+  struct Books math;
+
+  strcpy(tribody.name, "tribody");
+  strcpy(tribody.author, "cixin liu");
+  strcpy(tribody.subject, "science fiction");
+  tribody.book_id = 11123;
+
+  strcpy(math.name, "math");
+  strcpy(math.author, "People's Education Press");
+  strcpy(math.subject, "textbook");
+  math.book_id = 42343;
+
+  printBook(&tribody);
+  printBook(&math);
+
+  /**
+   * 结构体占用存储空间,以32位机为例
+   * size1_t 存储空间分布为a(1byte)+空闲(3byte)+b(4byte)+c(1byte)+空闲(3byte)=12(byte)。
+   * size2_t 存储空间分布为a(1byte)+b(1byte)+空闲(2byte)+c(4byte)=8(byte)。
+   */
+
+  printf("size1_t size=%lu,size2_t size=%lu\r\n", sizeof(size1_t), sizeof(size2_t));
+
+  return 0;
+}
