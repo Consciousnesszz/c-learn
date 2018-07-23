@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 
+/**
+ * 结构 在内存空间中保存类似于 数组，即结构也是内存空间中一块连续的地址
+ *  1. 结构定义不预留内存
+ *  2. 结构定义一般放在头文件后，程序开始部分
+ *  3. 结构定义仅描述结构的形式，使用结构需声明结构变量
+ */
+
 struct Books {
   char name[50];
   char author[50];
@@ -29,7 +36,7 @@ struct bs {
 };
 
 void printBook(struct Books *book) {
-  // 使用 -> 运算符，通过 指针方式 访问 struct（结构）成员
+  // 可使用 -> 运算符，通过 指针方式 访问 struct（结构）成员
   printf("Book name : %s\n", book->name);
   printf("Book author : %s\n", book->author);
   printf("Book subject : %s\n", book->subject);
@@ -45,10 +52,7 @@ int main() {
   strcpy(tribody.subject, "science fiction");
   tribody.book_id = 11123;
 
-  strcpy(math.name, "math");
-  strcpy(math.author, "People's Education Press");
-  strcpy(math.subject, "textbook");
-  math.book_id = 42343;
+  math = {"math", "People's Education Press", "textbook", 42343};
 
   printBook(&tribody);
   printBook(&math);

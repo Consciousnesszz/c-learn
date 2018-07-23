@@ -4,7 +4,8 @@
 
 /**
  * 1 void *calloc(int num, int size);
- * 在内存中动态地分配 num 个长度为 size 的连续空间，并将每一个字节都初始化为 0。所以它的结果是分配了 num *size 个字节长度的内存空间，并且每个字节的值都是0。
+ * 在内存中动态地分配 num 个长度为 size 的连续空间，并将每一个字节都初始化为 0。
+ * 所以它的结果是分配了 num *size 个字节长度的内存空间，并且每个字节的值都是0。
  * 2 void free(void *address);
  * 该函数释放 address 所指向的内存块, 释放的是动态分配的内存空间。
  * 3 void *malloc(int num);
@@ -13,8 +14,7 @@
  * 该函数重新分配内存，把内存扩展到 newsize。
 */
 
-int main()
-{
+int main() {
   char name[30];
   char *description; // 创建指针
 
@@ -35,8 +35,7 @@ int main()
   description = realloc(description, 100 * sizeof(char));
   if (description == NULL) {
     fprintf(stderr, "Not enough memory");
-  }
-  else {
+  } else {
     strcat(description, "who is very handsome.");
   }
 
